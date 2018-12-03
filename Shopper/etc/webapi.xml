@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/shopper/create" method="POST">
+        <service class="Alexsample\Shopper\Api\Repository\ShopperRepositoryInterface"
+                 method="createNewShopper"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/shopper/update" method="POST">
+        <service class="Alexsample\Shopper\Api\Repository\ShopperRepositoryInterface"
+                 method="updateShopper"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/shopper/:id" method="GET">
+        <service class="Alexsample\Shopper\Api\Repository\ShopperRepositoryInterface"
+                 method="getShopperById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/order/create" method="POST">
+        <service class="Alexsample\Shopper\Api\Repository\OrderRepositoryInterface"
+                 method="createNewOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/order/get_by_shopper/:id" method="GET">
+        <service class="Alexsample\Shopper\Api\Repository\OrderRepositoryInterface"
+                 method="getOrders"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

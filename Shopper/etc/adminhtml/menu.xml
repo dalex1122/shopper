@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Alexsample_Shopper::shopper" title="Alexsample Shopper" module="Alexsample_Shopper" sortOrder="100"
+             resource="Alexsample_Shopper::shopper" parent="Magento_Sales::sales"/>
+
+        <add id="Alexsample_Shopper::shopper_shopper" title="Shopper" module="Alexsample_Shopper" sortOrder="10"
+             action="shopper/shopper" resource="Alexsample_Shopper::shopper" parent="Alexsample_Shopper::shopper"/>
+        <add id="Alexsample_Shopper::shopper_order" title="Order" module="Alexsample_Shopper" sortOrder="20"
+             action="shopper/order" resource="Alexsample_Shopper::order" parent="Alexsample_Shopper::shopper"/>
+    </menu>
+</config>

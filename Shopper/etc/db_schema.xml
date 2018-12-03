@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="alx_shopper" resource="" engine="innodb">
+    <column xsi:type="int" name="shopper_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="varchar" name="email" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="name" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="last_name" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="phone" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="city" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="street" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="house_number" nullable="true" length="255"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="shopper_id"/>
+    </constraint>
+    <constraint xsi:type="unique" name="ALX_SHOPPER_EMAIL">
+      <column name="email"/>
+    </constraint>
+    <index name="ALX_SHOPPER_NAME" indexType="btree">
+      <column name="name"/>
+    </index>
+    <index name="ALX_SHOPPER_LAST_NAME" indexType="btree">
+      <column name="last_name"/>
+    </index>
+    <index name="ALX_SHOPPER_EMAIL_NAME_LAST_NAME" indexType="fulltext">
+      <column name="email"/>
+      <column name="name"/>
+      <column name="last_name"/>
+    </index>
+  </table>
+  <table name="alx_order" resource="" engine="innodb">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="varchar" name="order_id" nullable="true" length="255"/>
+    <column xsi:type="int" name="shopper_id" padding="10" unsigned="true" nullable="true" identity="false"/>
+    <column xsi:type="decimal" name="order_total" scale="4" precision="12" unsigned="false" nullable="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" name="ALX_ORDER_SHOPPER_ID_ALX_SHOPPER_SHOPPER_ID" table="alx_order" column="shopper_id" referenceTable="alx_shopper" referenceColumn="shopper_id" onDelete="CASCADE"/>
+    <constraint xsi:type="unique" name="ALX_ORDER_ORDER_ID">
+      <column name="order_id"/>
+    </constraint>
+  </table>
+</schema>

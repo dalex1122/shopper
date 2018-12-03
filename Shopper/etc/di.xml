@@ -1,0 +1,71 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Alexsample\Shopper\Api\Data\OrderInterface"
+                type="Alexsample\Shopper\Model\Order"/>
+    <preference for="Alexsample\Shopper\Api\Data\ShopperInterface"
+                type="Alexsample\Shopper\Model\Shopper"/>
+    <preference for="Alexsample\Shopper\Api\Data\ShopperSearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Alexsample\Shopper\Api\Data\OrderSearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <!--REPOSITORY-->
+    <preference for="Alexsample\Shopper\Api\Repository\OrderRepositoryInterface"
+                type="Alexsample\Shopper\Repository\OrderRepository"/>
+    <preference for="Alexsample\Shopper\Api\Repository\ShopperRepositoryInterface"
+                type="Alexsample\Shopper\Repository\ShopperRepository"/>
+
+    <!--SERVICE-->
+    <preference for="Alexsample\Shopper\Api\Service\TokenServiceInterface"
+                type="Alexsample\Shopper\Service\TokenService"/>
+
+    <!--UI-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shopper_shopper_listing_data_source" xsi:type="string">Alexsample\Shopper\Model\ResourceModel\Shopper\Grid\Collection</item>
+                <item name="shopper_order_listing_data_source" xsi:type="string">Alexsample\Shopper\Model\ResourceModel\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="ShopperShopperGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShopperShopperGridDataProvider" type="Alexsample\Shopper\Ui\Shopper\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Alexsample\Shopper\Model\ResourceModel\Shopper\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ShopperShopperGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShopperOrderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShopperOrderGridDataProvider" type="Alexsample\Shopper\Ui\Order\Listing\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Alexsample\Shopper\Model\ResourceModel\Order\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ShopperOrderGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+
+    <!--CLI-->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="TokenCommand" xsi:type="object">Alexsample\Shopper\Console\Command\Command</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
